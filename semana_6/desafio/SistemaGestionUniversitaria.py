@@ -21,6 +21,9 @@ class Estudiante(Persona):
     def Presentarse(self):
         return f"hola mi nombre es {self.nombre} {self.apellido}, naci el {self.fecha_de_nacimiento}, me matricule el\n {self.matricula}, pertenezco a la carrera de {self.carrera} y voy en el {self.semestre}"
     
+    def __str__(self):
+        return f"{self.nombre} {self.apellido}, nacido el {self.fecha_de_nacimiento}, matriculado en {self.matricula}, carrera: {self.carrera}, semestre: {self.semestre}"
+    
 jorge = Estudiante("Jorge", "Fierro", "01/27/2004", "2023", "Ingenieria Civil Informatica", "segundo semestre")
 print(jorge.Estudiar("matematicas", "2 horas"))
 print(jorge.Presentarse())
@@ -61,9 +64,9 @@ class Grupo:
         self.profesor = profesor
         self.estudiantes = []
         
-    def Agregar_estudiante(self,estudiante):
-        self.estudiantes.append(estudiante)
-        print(f"Se agrego el estudiante {estudiante.nombre}")
+    def Agregar_estudiante(self,Agregarestudiante):
+        self.estudiantes.append(Agregarestudiante)
+        print(f"Se agrego el estudiante {Agregarestudiante.nombre}")
         
     def Mostrar_estudiantes(self):
         for i in(self.estudiantes):
@@ -81,3 +84,27 @@ grupo1 = Grupo("1",informatica,julian)
 grupo1.Agregar_estudiante(jorge)
 print(grupo1.Mostrar_grupo())
 
+
+Running = True
+def Funcion_crear_Estudiantes():
+    
+    cantidadEstudiantes = int(input("Ingresa los estudiantes a crear: "))
+    for i in range(1, cantidadEstudiantes + 1):
+        print("ingrese los datos del estudiante ", i)
+        nombre_estudiante = input("Nombre: ")
+        apellido_estudiante = input("Apellido: ")
+        fecha_nacimiento_estudiante = input("fecha de nacimiento: ")
+        fecha_matricula = input("fecha de matricula: ")
+        carrera_estudiante = input("carrera: ")
+        semestre_estudiante = input("semestre: ")
+        
+        nuevo_estudiante = Estudiante(nombre_estudiante, apellido_estudiante, fecha_nacimiento_estudiante, fecha_matricula, carrera_estudiante, semestre_estudiante)
+        estudiantesas.append(nuevo_estudiante)
+
+while Running:
+    estudiantesas = []
+    quieres = input("quieres agregar estudiantes) (S/N): ")
+    if quieres == "S":
+        Funcion_crear_Estudiantes()
+    for i in(estudiantesas):
+        i.nombre
