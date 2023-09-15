@@ -118,16 +118,28 @@ def Funcion_crear_Grupo():
     for i in range(1, cantidadGrupos +1):
         print("ingrese los siguientes datos para el grupo ", i)
         numeroGrupo = input("numero del grupo: ")
+        print(f"asignaturas para crear tu grupo:")
+        for asignaturas in (asignaturasExe):
+            print(asignaturas.nombre)
         Asignatura_grupo = input("Asignatura: ")
+        for i in (asignaturasExe):
+            if i.nombre == Asignatura_grupo: #verifico si el nombre de la asignatura es el mismo que la instancia con el nombre de la asignatura
+                transformadaAsignatura = i #Almaceno la instancia en una variable 
+        print(f"Profesores disponibles para el grupo")
+        for profesores in (profesoresExe):
+            print(profesores.nombre)
         Profesor_grupo = input("Profesor: ")
+        for i in (profesoresExe):
+            if i.nombre == Profesor_grupo:
+                trasformado_profesor = i
         
-        nuevo_grupo = Grupo(numeroGrupo,Asignatura_grupo,Profesor_grupo)
+        nuevo_grupo = Grupo(numeroGrupo,transformadaAsignatura,trasformado_profesor)
         gruposExe.append(nuevo_grupo)
         
 def Funcion_crear_Profesor():
     cantidadProfesores = int(input("Ingresa la cantidad de profesores a crear: "))
     for i in range(1, cantidadProfesores +1):
-        print("ingrese los siguientes datos para el El profesor ", i)
+        print("ingrese los siguientes datos para el profesor ", i)
         nombreProfesor = input("Nombre: ")
         ApellidoProfesor = input("Apellido: ")
         FechaNacimiento_Profesor = input("Fecha de nacimiento: ")
@@ -136,20 +148,62 @@ def Funcion_crear_Profesor():
         
         nuevo_profesor = Profesor(nombreProfesor,ApellidoProfesor,FechaNacimiento_Profesor,numeroEmpleado_Profesor,DepartamentoProfesor)
         profesoresExe.append(nuevo_profesor)
-    
+        
+def agregar_el_estudiante(estudioso):
+    for i in(estudiantesExe):
+        if i.nombre == estudioso:
+            gruposExe[0].Agregar_estudiante(i)
+        else:
+            print(f"El estudiante {estudioso} no existe")
+            
 Running = True # Hace funcionar el bucle
 
 #Bucle para interactuar de forma textual 
 while Running:
-    asignaturasExe = []
     gruposExe = []
     profesoresExe = []
+    asignaturasExe = []
     estudiantesExe = []
-    quieres = input("quieres agregar crear Asignaturas? (S/N): ").upper()
-    if quieres == "S":
-        Funcion_crear_Asignaturas()
-    elif quieres == "N":
-        print("Que tenga buen dia")
-        Running = False
-    else:
-        print("Incorrecto")
+
+    print("(No) Encribe '0' ")
+    print("(Si) Escribe '1'")
+    n = int(input("Buenos dias quieres comenzar?: "))
+    Running = n
+
+    while n:
+        print("0) Salir")
+        print("1) Crear asignaturas")
+        print("2) Crear estudiantes")
+        print("3) Crear grupos")
+        print("4) Crear profesor")
+        opcion = input("Ingrese el numero de su opcion: ")
+        if opcion == "1":
+            Funcion_crear_Asignaturas()
+            
+        elif opcion == "2":
+            Funcion_crear_Estudiantes()
+            print("Estudiantes creados:")
+            for estudiantes in (estudiantesExe):
+                print(f"Nombre: {estudiantes.nombre} / Apellido: {estudiantes.apellido} / Nacimiento: {estudiantes.fecha_de_nacimiento} / Matricula: {estudiantes.matricula} / Carrera: {estudiantes.carrera} / Semestre: {estudiantes.semestre}")
+        elif opcion == "3":
+            if (len(profesoresExe) and len(asignaturasExe)) == 0:
+                print("No puedes crear un grupo sin antes crear un profesor y una asignatura")
+                print("")
+            else:
+                Funcion_crear_Grupo()
+        elif opcion == "4":
+            Funcion_crear_Profesor()
+            
+        elif opcion == "0":
+            n = 0
+    print("Quieres agregar alumnos a algun grupo? (S/N)")
+    opcionagregar = input("").upper()
+    if opcionagregar == "S":
+        for i in (estudiantesExe):
+            print(i.nombre)
+        for i in range(2):
+            jsedanuda = input("estudiante:")
+            agregar_el_estudiante(jsedanuda)
+        
+    for i in (gruposExe):
+        print(i.Mostrar_grupo())
