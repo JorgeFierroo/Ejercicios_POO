@@ -4,11 +4,12 @@ class Persona:
         self.apellido = apellido
         self.fecha_de_nacimiento = fecha_de_nacimiento
 
+    #Metodo para presentarse
     def Presentarse(self):
         print(f"hola mi nombre es {self.nombre} {self.apellido} y naci {self.fecha_de_nacimiento}")
 
 
-class Estudiante(Persona):
+class Estudiante(Persona): #Clase estudiante hereda atributos de persona
     def __init__(self, nombre, apellido, fecha_de_nacimiento,matricula,carrera,semestre):
         super().__init__(nombre, apellido, fecha_de_nacimiento)
         self.matricula = matricula
@@ -54,8 +55,10 @@ class Asignatura:
     def Mostrar_informacion(self):
         return f"Asignatura: {self.nombre} / Codigo: {self.codigo} / Creditos: {self.creditos}"
     
-informatica = Asignatura("programacion","300","5")
-print(informatica.Mostrar_informacion())
+    
+#Comprobando si funciona la clase asignatura
+informatica = Asignatura("programacion","300","5") #Creando una instancia de asignatura
+print(informatica.Mostrar_informacion()) #Mostrando la informacion de la asignatura creada
 
 class Grupo:
     def __init__(self,numero_grupo,asignatura,profesor):
@@ -85,9 +88,7 @@ grupo1.Agregar_estudiante(jorge)
 print(grupo1.Mostrar_grupo())
 
 
-Running = True
 def Funcion_crear_Estudiantes():
-    
     cantidadEstudiantes = int(input("Ingresa los estudiantes a crear: "))
     for i in range(1, cantidadEstudiantes + 1):
         print("ingrese los datos del estudiante ", i)
@@ -99,12 +100,56 @@ def Funcion_crear_Estudiantes():
         semestre_estudiante = input("semestre: ")
         
         nuevo_estudiante = Estudiante(nombre_estudiante, apellido_estudiante, fecha_nacimiento_estudiante, fecha_matricula, carrera_estudiante, semestre_estudiante)
-        estudiantesas.append(nuevo_estudiante)
+        estudiantesExe.append(nuevo_estudiante)
+        
+def Funcion_crear_Asignaturas():
+    cantidadAsignaturas = int(input("Ingresa la cantidad de asignaturas a crear: "))
+    for i in range(1, cantidadAsignaturas + 1):
+        print("ingrese los siguientes datos para su asignatura ", i)
+        nombreAsignatura = input("Nombre: ")
+        codigoAsignatura = input("Codigo: ")
+        creditosAsignatura = input("Creditos: ")
+    
+        nueva_Asignatura = Asignatura(nombreAsignatura,codigoAsignatura,creditosAsignatura)
+        asignaturasExe.append(nueva_Asignatura)
+    
+def Funcion_crear_Grupo():
+    cantidadGrupos = int(input("Ingresa la cantidad de grupos a crear: "))
+    for i in range(1, cantidadGrupos +1):
+        print("ingrese los siguientes datos para el grupo ", i)
+        numeroGrupo = input("numero del grupo: ")
+        Asignatura_grupo = input("Asignatura: ")
+        Profesor_grupo = input("Profesor: ")
+        
+        nuevo_grupo = Grupo(numeroGrupo,Asignatura_grupo,Profesor_grupo)
+        gruposExe.append(nuevo_grupo)
+        
+def Funcion_crear_Profesor():
+    cantidadProfesores = int(input("Ingresa la cantidad de profesores a crear: "))
+    for i in range(1, cantidadProfesores +1):
+        print("ingrese los siguientes datos para el El profesor ", i)
+        nombreProfesor = input("Nombre: ")
+        ApellidoProfesor = input("Apellido: ")
+        FechaNacimiento_Profesor = input("Fecha de nacimiento: ")
+        numeroEmpleado_Profesor = input("Numero de empleado: ")
+        DepartamentoProfesor = input("Departamento: ")
+        
+        nuevo_profesor = Profesor(nombreProfesor,ApellidoProfesor,FechaNacimiento_Profesor,numeroEmpleado_Profesor,DepartamentoProfesor)
+        profesoresExe.append(nuevo_profesor)
+    
+Running = True # Hace funcionar el bucle
 
+#Bucle para interactuar de forma textual 
 while Running:
-    estudiantesas = []
-    quieres = input("quieres agregar estudiantes) (S/N): ")
+    asignaturasExe = []
+    gruposExe = []
+    profesoresExe = []
+    estudiantesExe = []
+    quieres = input("quieres agregar crear Asignaturas? (S/N): ").upper()
     if quieres == "S":
-        Funcion_crear_Estudiantes()
-    for i in(estudiantesas):
-        i.nombre
+        Funcion_crear_Asignaturas()
+    elif quieres == "N":
+        print("Que tenga buen dia")
+        Running = False
+    else:
+        print("Incorrecto")
